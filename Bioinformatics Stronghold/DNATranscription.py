@@ -1,5 +1,9 @@
-file = open("C:\\Users\\Aaron\\Downloads\\rosalind_rna.txt", 'r')
-DNA = list(file.readline())
-for i in range(len(DNA)):
-    if(DNA[i]=='T'): DNA[i]='U'
-print ''.join(DNA)
+import BioLib
+
+##Given: A DNA string t having length at most 1000 nt.
+##
+##Return: The transcribed RNA string of t.
+
+dna = BioLib.DNA(BioLib.getFile("rna").read())
+rna = dna.toRNA()
+print rna

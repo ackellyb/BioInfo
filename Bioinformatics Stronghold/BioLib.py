@@ -1,10 +1,23 @@
 import itertools
+class RNA:
 
+    rna = str()
+
+
+    def __init__(self,dna):
+        self.rna = rna
+
+        
+    def toDNA(self):
+        return self.rna.replace("U","T")
+
+    
 class DNA:
+    
     dna = str()
     
     def __init__(self,dna):
-        self.dna = dna
+        self.dna = dna.replace("\n","")
         
     def reverseComplement(self):
         rc = str()
@@ -15,30 +28,44 @@ class DNA:
             elif(base=='C'): rc+="G"
             elif(base=='G'): rc+="C"
         return rc
-    def GCContent(self):
-        c = g = 0
-        for x in self.dna:
-            if("C" == x): c+=1
-            elif("G" == x): g+=1
-        return float(c+g)/len(self.dna)
+
     
-    def dnaToRna(self):
+    def nucleotideCounts(self):
+        count = dict()
+        for x in self.dna:
+            count[x] = count.get(x,0)+1
+        return count
+
+
+    def GCContent(self):
+        count = self.nucleotideCounts()
+        return float(count["C"]+count["G"])/len(self.dna)
+
+    
+    def toRNA(self):
         return self.dna.replace("T","U")
-    def getDNA(self):
-        return self.dna
+
         
 
 class FASTADNA(DNA):
+    
     name = str()
+
+    
     def __init__(self, name, dna):
         DNA.__init__(self,dna)
         self.name = name
             
 class Tables:
+    
     def getRNACodonTable():
         return getCodonTranslationTable(false)
+
+    
     def getDNACodonTable():
         return getCodonTranslationTable(true)
+
+    
     def getCodonTranslationTable(dna):
         if(dna==True): file = "DNACodonTable.txt"
         else: file = "RNACodonTable.txt"
@@ -55,19 +82,25 @@ def readFASTA(file):
     NameDNA = list()
     for x in strings:
         s = x.split("\n",1)
-        s[1] = s[1].replace("\n","")
         NameDNA.append(FASTADNA(s[0],s[1]))
     return NameDNA
 
-def dnaToRna(dna):
-    return dna.replace("T","U")
-def rnaToDna(rna):
-    return rna.replace("U","T")
+
+
 def createReadingFrame(nstring):
     return [nstring[i:i+3] for i in range(0, len(nstring), 3)]
 
+
+def hammingDistance(dna1,dna2):
+    distance = 0
+    for i, x in enumerate(dna1.dna):
+        if(x != dna2.dna[i]): distance+=1
+    return distance
+
+
 def getFile(code):
     return open("C:\\Users\Aaron\\Downloads\\rosalind_"+code+".txt","r")
+
 
 def getKmers(iterable, number):
     kmers = list()
