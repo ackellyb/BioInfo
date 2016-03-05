@@ -3,4 +3,4 @@ a = 58
 b = 70
 c = 102
 d = 106
-print s[a:b+1] + " " + s[c:d+1]
+print ('{0} {1}'.format(s[a:b+1],s[c:d+1]))
