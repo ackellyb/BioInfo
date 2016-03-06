@@ -5,6 +5,7 @@ import tempfile
 import simple_loops
 import simple_squares
 import string_splicing
+import simple_dictionary
 class TestVillage:
     def test_simple_files(self):
         with tempfile.NamedTemporaryFile(mode="r+") as temp:
@@ -46,4 +47,9 @@ He beat a very brave retreat""")
         a = 100
         b = 200
         result = simple_loops.sum_odd_integers(a, b)
+        assert expected == result
+
+    def test_simple_dictionary(self):
+        expected = {"and": 1, "We": 1, "tried": 3, "dicts": 1, "list": 1, "we": 2, "also": 1, "Zen": 1}
+        result = simple_dictionary.count_words("We tried list and we tried dicts also we tried Zen")
         assert expected == result

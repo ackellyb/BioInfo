@@ -10,7 +10,7 @@ def remove_odd_lines(file_name):
 
 
 def main():
-    print(remove_odd_lines("../Data/rosalind_ini5_1_dataset.txt"))
+    print(remove_odd_lines("../Data/rosalind_ini5.txt"))
 
 if __name__ == "__main__":
     main()
