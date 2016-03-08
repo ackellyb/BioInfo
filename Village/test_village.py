@@ -1,11 +1,12 @@
 import pytest
-import os
 import simple_files
 import tempfile
 import simple_loops
 import simple_squares
 import string_splicing
 import simple_dictionary
+
+
 class TestVillage:
     def test_simple_files(self):
         with tempfile.NamedTemporaryFile(mode="r+") as temp:
