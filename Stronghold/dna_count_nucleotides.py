@@ -7,7 +7,7 @@ from rosalind_library import DNA
 #        that the symbols 'A', 'C', 'G', and 'T' occur in s.
 
 
-def create_nucleotide_count_string(dna):
+def format_string(dna):
     counts = dna.nucleotide_counts()
     return "{0} {1} {2} {3}".format(counts['A'], counts['C'], counts['G'], counts['T'])
 
@@ -15,7 +15,7 @@ def create_nucleotide_count_string(dna):
 def main():
     with open('../Data/rosalind_dna.txt', 'r') as file:
         dna = DNA(file.read())
-        print(create_nucleotide_count_string(dna))
+        print(format_string(dna))
 
 if __name__ == '__main__':
     main()

@@ -1,12 +1,20 @@
 import itertools
 import re
 
+
 class RNA:
 
     rna = str()
 
     def __init__(self, rna):
-        self.rna = rna.strip()
+        rna = rna.strip()
+        rna_regex = re.compile(r'[^ACGU\s]+?', re.IGNORECASE)
+        if rna_regex.search(rna):
+            raise ValueError('RNA String had a value not of A, C, G or U')
+        self.rna = rna.upper()
+
+    def __eq__(self, other):
+        return self.rna == other.rna
 
     def to_dna(self):
         return DNA(self.rna.replace("U", "T"))
@@ -21,7 +29,10 @@ class DNA:
         dna_regex = re.compile(r'[^ACGT\s]+?', re.IGNORECASE)
         if dna_regex.search(dna):
             raise ValueError('DNA string had a value not of A, C, G or T')
-        self.dna = dna.strip()
+        self.dna = dna.upper()
+
+    def __eq__(self, other):
+        return self.dna == other.dna
         
     def reverse_complement(self):
         translation_table = str.maketrans("ATCG", "TAGC")
