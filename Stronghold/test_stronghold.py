@@ -3,6 +3,7 @@ from rosalind_library import DNA
 import dna_count_nucleotides
 import rna_dna_transcription
 import recv_dna_strand_complement
+import fib_recurrence_rabbits
 
 
 class TestStronghold:
@@ -23,4 +24,19 @@ class TestStronghold:
         expected = 'ACCGGGTTTT'
         dna = DNA('AAAACCCGGT')
         result = recv_dna_strand_complement.format_string(dna)
+        assert expected == result
+
+    def test_fib_recurrence_rabbits_month_one(self):
+        expected = 1
+        result = fib_recurrence_rabbits.fibonacci_sequence(1, 1)
+        assert expected == result
+
+    def test_fib_recurrence_rabbits_month_two(self):
+        expected = 1
+        result = fib_recurrence_rabbits.fibonacci_sequence(2, 1)
+        assert expected == result
+
+    def test_fib_recurrence_rabbits_success(self):
+        expected = 19
+        result = fib_recurrence_rabbits.fibonacci_sequence(5, 3)
         assert expected == result
