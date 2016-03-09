@@ -1,4 +1,5 @@
 import itertools
+import re
 
 class RNA:
 
@@ -16,6 +17,10 @@ class DNA:
     dna = str()
     
     def __init__(self, dna):
+        dna = dna.strip()
+        dna_regex = re.compile(r'[^ACGT\s]+?', re.IGNORECASE)
+        if dna_regex.search(dna):
+            raise ValueError('DNA string had a value not of A, C, G or T')
         self.dna = dna.strip()
         
     def reverse_complement(self):
@@ -24,12 +29,9 @@ class DNA:
         return dna_complement
     
     def nucleotide_counts(self):
-        count = dict()
+        count = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
         for x in self.dna:
-            if x not in count:
-                count[x] = 1
-            else:
-                count[x] += 1
+            count[x] += 1
         return count
 
     def gc_percentage(self):

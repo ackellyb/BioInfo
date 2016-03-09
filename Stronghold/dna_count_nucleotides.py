@@ -6,7 +6,16 @@ from rosalind_library import DNA
 # Return: Four integers (separated by spaces) counting the respective number of times
 #        that the symbols 'A', 'C', 'G', and 'T' occur in s.
 
-with open('../Data/rosalind_dna.txt', 'r') as file:
+
+def create_nucleotide_count_string(file):
     dna = DNA(file.read())
     counts = dna.nucleotide_counts()
-    print("{0} {1} {2} {3}".format(counts['A'], counts['C'], counts['G'], counts['T']))
+    return "{0} {1} {2} {3}".format(counts['A'], counts['C'], counts['G'], counts['T'])
+
+
+def main():
+    with open('../Data/rosalind_dna.txt', 'r') as file:
+        print(create_nucleotide_count_string(file))
+
+if __name__ == '__main__':
+    main()
