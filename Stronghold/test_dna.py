@@ -27,7 +27,6 @@ class TestDNA:
         dna2 = DNA('ACGT')
         assert dna1 != dna2
 
-
     def test_count_nucleotides_empty(self):
         expected = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
         dna = DNA('')
@@ -41,7 +40,13 @@ class TestDNA:
         assert expected == result
 
     def test_dna_to_rna_success(self):
-        expected = RNA("ACGU")
-        dna = DNA("ACGT")
+        expected = RNA('ACGU')
+        dna = DNA('ACGT')
         result = dna.to_rna()
         assert expected == result
+
+    def test_dna_reverse_complement_success(self):
+        expected = 'CGTA'
+        dna = DNA('TACG')
+        result = dna.reverse_complement()
+        assert result == expected
