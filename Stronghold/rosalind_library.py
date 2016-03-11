@@ -52,6 +52,13 @@ class DNA:
     def to_rna(self):
         return RNA(self.dna.replace('T', 'U'))
 
+    def get_hamming_distance(self, other):
+        distance = 0
+        for (a, b)in zip(self.dna, other.dna):
+            if a != b:
+                distance += 1
+        return distance
+
 
 class FASTADNA(DNA):
 
@@ -97,14 +104,6 @@ class Tables:
 
 def create_reading_frame(nstring):
     return [nstring[i:i+3] for i in range(0, len(nstring), 3)]
-
-
-def hamming_distance(dna1, dna2):
-    distance = 0
-    for i, x in enumerate(dna1.dna):
-        if x != dna2.dna[i]:
-            distance += 1
-    return distance
 
 
 def get_kmers(iterable, number):

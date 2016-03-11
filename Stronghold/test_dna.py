@@ -56,3 +56,17 @@ class TestDNA:
         dna = DNA("CCGGTA")
         result = dna.gc_content()
         assert abs(expected-result) < 0.001
+
+    def test_hamming_distance_no_diff(self):
+        expected = 0
+        dna = DNA("CCC")
+        dna2 = DNA("CCC")
+        result = dna.get_hamming_distance(dna2)
+        assert expected == result
+
+    def test_hamming_distance_diff(self):
+        expected = 7
+        dna = DNA("GAGCCTACTAACGGGAT")
+        dna2 = DNA("CATCGTAATGACGGCCT")
+        result = dna.get_hamming_distance(dna2)
+        assert expected == result
