@@ -50,3 +50,9 @@ class TestDNA:
         dna = DNA('TACG')
         result = dna.reverse_complement()
         assert result == expected
+
+    def test_dna_gc_content_success(self):
+        expected = 66.666
+        dna = DNA("CCGGTA")
+        result = dna.gc_content()
+        assert abs(expected-result) < 0.001

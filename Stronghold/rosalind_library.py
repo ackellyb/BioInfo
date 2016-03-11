@@ -7,8 +7,8 @@ class RNA:
     rna = str()
 
     def __init__(self, rna):
-        rna = rna.strip()
-        rna_regex = re.compile(r'[^ACGU\s]+?', re.IGNORECASE)
+        rna = re.sub(r'\s', '', rna)
+        rna_regex = re.compile(r'[^ACGU]+?', re.IGNORECASE)
         if rna_regex.search(rna):
             raise ValueError('RNA String had a value not of A, C, G or U')
         self.rna = rna.upper()
@@ -17,7 +17,7 @@ class RNA:
         return self.rna == other.rna
 
     def to_dna(self):
-        return DNA(self.rna.replace("U", "T"))
+        return DNA(self.rna.replace('U', 'T'))
 
     
 class DNA:
@@ -25,8 +25,8 @@ class DNA:
     dna = str()
     
     def __init__(self, dna):
-        dna = dna.strip()
-        dna_regex = re.compile(r'[^ACGT\s]+?', re.IGNORECASE)
+        dna = re.sub(r'\s', '', dna)
+        dna_regex = re.compile(r'[^ACGT]+?', re.IGNORECASE)
         if dna_regex.search(dna):
             raise ValueError('DNA string had a value not of A, C, G or T')
         self.dna = dna.upper()
@@ -35,7 +35,7 @@ class DNA:
         return self.dna == other.dna
         
     def reverse_complement(self):
-        translation_table = str.maketrans("ATCG", "TAGC")
+        translation_table = str.maketrans('ATCG', 'TAGC')
         dna_complement = self.dna.translate(translation_table)[::-1]
         return dna_complement
     
@@ -45,12 +45,12 @@ class DNA:
             count[x] += 1
         return count
 
-    def gc_percentage(self):
+    def gc_content(self):
         count = self.nucleotide_counts()
-        return (count["C"]+count["G"])/len(self.dna)
+        return (count['C']+count['G'])/len(self.dna) * 100
     
     def to_rna(self):
-        return RNA(self.dna.replace("T", "U"))
+        return RNA(self.dna.replace('T', 'U'))
 
 
 class FASTADNA(DNA):
@@ -62,13 +62,14 @@ class FASTADNA(DNA):
         self.name = name
 
     @staticmethod
-    def create_fasta_from_file(file):
-        data = file.read().split(">")[1:]
-        name_dna = list()
-        for x in data:
-            s = x.split("\n", 1)
-            name_dna.append(FASTADNA(s[0], s[1]))
-        return name_dna
+    def read_list_from_file(file_name):
+        with open(file_name) as file:
+            data = file.read().split('>')[1:]
+            dna_list = list()
+            for x in data:
+                s = x.split('\n', 1)
+                dna_list.append(FASTADNA(s[0], s[1]))
+            return dna_list
 
 
 class Tables:
