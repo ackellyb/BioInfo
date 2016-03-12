@@ -6,6 +6,7 @@ import rna_dna_transcription
 import recv_dna_strand_complement
 import fib_recurrence_rabbits
 import gc_content_computation
+import iprb_mendels_first_law
 import tempfile
 
 
@@ -61,4 +62,14 @@ TGGGAACCTGCGGGCAGTAGGTGGAAT""")
             result = gc_content_computation.compute(dna_list)
             assert abs(expected[0] - result[0]) < 0.001
             assert expected[1] == result[1]
+
+    def test_mendels_first_law_computation_simple(self):
+        expected = 0.78333
+        result = iprb_mendels_first_law.compute(2, 2, 2)
+        assert abs(expected - result) < 0.001
+
+    def test_mendels_first_law_computation_complex(self):
+        expected = 0.781772953415
+        result = iprb_mendels_first_law.compute(27, 17, 23)
+        assert abs(expected - result) < 0.001
 
