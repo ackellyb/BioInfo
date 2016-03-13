@@ -2,59 +2,63 @@ import itertools
 import re
 
 
-class RNA:
+class _PolyNucleotideStringFormat:
+    def __init__(self, regex, error_msg):
+        self.regex = re.compile(regex, re.IGNORECASE)
+        self.errorMsg = ValueError(error_msg)
 
-    rna = str()
 
-    def __init__(self, rna):
-        rna = re.sub(r'\s', '', rna)
-        rna_regex = re.compile(r'[^ACGU]+?', re.IGNORECASE)
-        if rna_regex.search(rna):
-            raise ValueError('RNA String had a value not of A, C, G or U')
-        self.rna = rna.upper()
+class _PolyNucleotides:
+    def __init__(self, string, string_format):
+        string = re.sub(r'\s', '', string)
+        if string_format.regex.search(string):
+            raise string_format.errorMsg
+        self.string = string.upper()
 
     def __eq__(self, other):
-        return self.rna == other.rna
+        return self.string == other.string
+
+    def split_into_codon(self):
+        return [self.string[i:i+3] for i in range(0, len(self.string), 3)]
+
+
+rnaStringFormat = _PolyNucleotideStringFormat(r'[^ACGU]+?', 'RNA String had a value not of A, C, G or U')
+dnaStringFormat = _PolyNucleotideStringFormat(r'[^ACGT]+?', 'DNA string had a value not of A, C, G or T')
+
+
+class RNA(_PolyNucleotides):
+    def __init__(self, string):
+        _PolyNucleotides.__init__(self, string, rnaStringFormat)
 
     def to_dna(self):
-        return DNA(self.rna.replace('U', 'T'))
+        return DNA(self.string.replace('U', 'T'))
 
     
-class DNA:
-    
-    dna = str()
-    
-    def __init__(self, dna):
-        dna = re.sub(r'\s', '', dna)
-        dna_regex = re.compile(r'[^ACGT]+?', re.IGNORECASE)
-        if dna_regex.search(dna):
-            raise ValueError('DNA string had a value not of A, C, G or T')
-        self.dna = dna.upper()
-
-    def __eq__(self, other):
-        return self.dna == other.dna
+class DNA(_PolyNucleotides):
+    def __init__(self, string):
+        _PolyNucleotides.__init__(self, string, dnaStringFormat)
         
     def reverse_complement(self):
         translation_table = str.maketrans('ATCG', 'TAGC')
-        dna_complement = self.dna.translate(translation_table)[::-1]
+        dna_complement = self.string.translate(translation_table)[::-1]
         return dna_complement
     
     def nucleotide_counts(self):
         count = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
-        for x in self.dna:
+        for x in self.string:
             count[x] += 1
         return count
 
     def gc_content(self):
         count = self.nucleotide_counts()
-        return (count['C']+count['G'])/len(self.dna) * 100
+        return (count['C']+count['G'])/len(self.string) * 100
     
     def to_rna(self):
-        return RNA(self.dna.replace('T', 'U'))
+        return RNA(self.string.replace('T', 'U'))
 
     def get_hamming_distance(self, other):
         distance = 0
-        for (a, b)in zip(self.dna, other.dna):
+        for (a, b)in zip(self.string, other.string):
             if a != b:
                 distance += 1
         return distance
@@ -64,9 +68,9 @@ class FASTADNA(DNA):
 
     name = str()
 
-    def __init__(self, name, dna):
-        DNA.__init__(self, dna)
+    def __init__(self, name, string):
         self.name = name
+        DNA.__init__(self, string)
 
     @staticmethod
     def read_list_from_file(file_name):
@@ -81,11 +85,13 @@ class FASTADNA(DNA):
 
 class Tables:
 
-    def get_rna_codon_table(self):
-        return self.__get_translation_table(False)
+    @staticmethod
+    def get_rna_codon_table():
+        return Tables.__get_translation_table(False)
 
-    def get_dna_codon_table(self):
-        return self.__get_translation_table(True)
+    @staticmethod
+    def get_dna_codon_table():
+        return Tables.__get_translation_table(True)
 
     @staticmethod
     def __get_translation_table(is_dna):

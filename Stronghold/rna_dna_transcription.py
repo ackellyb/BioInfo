@@ -7,7 +7,7 @@ from rosalind_library import DNA
 
 def format_string(dna):
     rna = dna.to_rna()
-    return rna.rna
+    return rna.string
 
 
 def main():

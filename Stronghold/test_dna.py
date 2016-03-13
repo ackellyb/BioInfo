@@ -11,11 +11,11 @@ class TestDNA:
 
     def test_create_dna_success(self):
         dna = DNA('ACGT')
-        assert dna.dna == 'ACGT'
+        assert dna.string == 'ACGT'
 
     def test_create_dna_mixed_case(self):
         dna = DNA('aCGta')
-        assert dna.dna == 'ACGTA'
+        assert dna.string == 'ACGTA'
 
     def test_dna_equal_success(self):
         dna1 = DNA('ACG')

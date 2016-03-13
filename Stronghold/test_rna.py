@@ -10,7 +10,7 @@ class TestRNA:
 
     def test_create_rna_success(self):
         rna = RNA('ACGU')
-        assert rna.rna == 'ACGU'
+        assert rna.string == 'ACGU'
 
     def test_rna_equal_success(self):
         rna1 = RNA('ACG')
