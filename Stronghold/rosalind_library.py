@@ -9,17 +9,24 @@ class _PolyNucleotideStringFormat:
 
 
 class _PolyNucleotides:
-    def __init__(self, string, string_format):
+    def __init__(self, string, string_format=None):
         string = re.sub(r'\s', '', string)
-        if string_format.regex.search(string):
+        if string_format is not None and string_format.regex.search(string):
             raise string_format.errorMsg
         self.string = string.upper()
 
     def __eq__(self, other):
-        return self.string == other.string
+        return self.string == other.string and type(self) == type(other)
 
-    def split_into_codon(self):
-        return [self.string[i:i+3] for i in range(0, len(self.string), 3)]
+    def _transcribe_to_protein(self, codon_table):
+        protein_list = list()
+        for i in range(0, len(self.string), 3):
+            codon = self.string[i:i+3]
+            if codon_table[codon] == 'Stop':
+                break
+            else:
+                protein_list.append(codon_table[codon])
+        return "".join(protein_list)
 
 
 rnaStringFormat = _PolyNucleotideStringFormat(r'[^ACGU]+?', 'RNA String had a value not of A, C, G or U')
@@ -32,6 +39,9 @@ class RNA(_PolyNucleotides):
 
     def to_dna(self):
         return DNA(self.string.replace('U', 'T'))
+
+    def transcribe_to_protein(self):
+        return _PolyNucleotides._transcribe_to_protein(self, Tables.get_rna_codon_table())
 
     
 class DNA(_PolyNucleotides):
@@ -62,6 +72,9 @@ class DNA(_PolyNucleotides):
             if a != b:
                 distance += 1
         return distance
+
+    def transcribe_to_protein(self):
+        return _PolyNucleotides._transcribe_to_protein(self, Tables.get_dna_codon_table())
 
 
 class FASTADNA(DNA):
@@ -97,9 +110,9 @@ class Tables:
     def __get_translation_table(is_dna):
         codon_table = dict()
         if is_dna:
-            file = '../DNACodonTable.txt'
+            file = '../Data/DNACodonTable.txt'
         else:
-            file = '../RNACodonTable.txt'
+            file = '../Data/RNACodonTable.txt'
 
         with open(file, 'r') as table:
             codons = table.read().split()

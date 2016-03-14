@@ -6,18 +6,20 @@ class TestRNA:
 
     def test_create_rna_wrong_values(self):
         with pytest.raises(ValueError) as ve_info:
-            rna = RNA('AUGCT')
+            RNA('AUGCT')
 
     def test_create_rna_success(self):
         rna = RNA('ACGU')
         assert rna.string == 'ACGU'
 
-    def test_rna_equal_success(self):
-        rna1 = RNA('ACG')
-        rna2 = RNA('ACG')
-        assert rna1 == rna2
+    def test_transcribe_to_protein_success(self):
+        expected = 'MAMAPRTEINSTRING'
+        rna = RNA('AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA')
+        result = rna.transcribe_to_protein()
+        assert expected == result
 
-    def test_rna_not_equal_success(self):
-        rna1 = RNA('ACG')
-        rna2 = RNA('ACGU')
-        assert rna1 != rna2
+    def test_transcribe_to_protein_early_stop(self):
+        expected = 'MAMA'
+        rna = RNA('AUGGCCAUGGCGUGACCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGG')
+        result = rna.transcribe_to_protein()
+        assert expected == result

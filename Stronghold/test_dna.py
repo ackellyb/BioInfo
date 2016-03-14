@@ -4,28 +4,13 @@ from rosalind_library import RNA
 
 
 class TestDNA:
-
     def test_create_dna_wrong_values(self):
         with pytest.raises(ValueError) as ve_info:
-            dna = DNA('AUGCT')
+            DNA('AUGCT')
 
     def test_create_dna_success(self):
         dna = DNA('ACGT')
         assert dna.string == 'ACGT'
-
-    def test_create_dna_mixed_case(self):
-        dna = DNA('aCGta')
-        assert dna.string == 'ACGTA'
-
-    def test_dna_equal_success(self):
-        dna1 = DNA('ACG')
-        dna2 = DNA('ACG')
-        assert dna1 == dna2
-
-    def test_dna_not_equal_success(self):
-        dna1 = DNA('ACG')
-        dna2 = DNA('ACGT')
-        assert dna1 != dna2
 
     def test_count_nucleotides_empty(self):
         expected = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
