@@ -1,4 +1,5 @@
 from rosalind_library import FASTADNA
+from rosalind_library import get_rosalind_data_path
 
 # Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
 #
@@ -16,7 +17,7 @@ def format_string(gc_dna):
 
 
 def main():
-    dna_list = FASTADNA.read_list_from_file("../Data/rosalind_gc.txt")
+    dna_list = FASTADNA.read_list_from_file(get_rosalind_data_path('gc'))
     print(format_string(compute(dna_list)))
 
 if __name__ == '__main__':

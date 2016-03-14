@@ -1,4 +1,5 @@
-import rosalind_library
+from rosalind_library import DNA
+from rosalind_library import get_rosalind_data_path
 
 # Given: Two DNA strings s and t of equal length (not exceeding 1 kbp).
 #
@@ -6,7 +7,7 @@ import rosalind_library
 
 
 def main():
-    with open('../Data/rosalind_hamm.txt', 'r') as file:
+    with open(get_rosalind_data_path('hamm')) as file:
         dna = DNA(file.readline())
         dna2 = DNA(file.readline())
         print(dna.get_hamming_distance(dna2))

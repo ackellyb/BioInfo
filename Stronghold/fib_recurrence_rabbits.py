@@ -1,3 +1,5 @@
+from rosalind_library import get_rosalind_data_path
+
 # Given: Positive integers n≤40 and k≤5.
 #
 # Return: The total number of rabbit pairs that will
@@ -20,7 +22,7 @@ def fibonacci_sequence(months, litter_size):
 
 
 def main():
-    with open('../Data/rosalind_fib.txt', 'r') as file:
+    with open(get_rosalind_data_path('fib')) as file:
         integers = file.readline().split(' ')
         print(fibonacci_sequence(int(integers[0]), int(integers[1])))
 

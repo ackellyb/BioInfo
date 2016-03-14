@@ -1,4 +1,5 @@
 from rosalind_library import DNA
+from rosalind_library import get_rosalind_data_path
 
 # Given: A DNA string s of length at most 1000 bp.
 #
@@ -11,7 +12,7 @@ def format_string(dna):
 
 
 def main():
-    with open('../Data/rosalind_recv.txt', 'r') as file:
+    with open(get_rosalind_data_path('recv')) as file:
         dna = DNA(file.read())
         print(format_string(dna))
 

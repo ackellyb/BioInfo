@@ -1,5 +1,6 @@
 import itertools
 import re
+from os import path
 
 
 class _PolyNucleotideStringFormat:
@@ -110,9 +111,9 @@ class Tables:
     def __get_translation_table(is_dna):
         codon_table = dict()
         if is_dna:
-            file = '../Data/DNACodonTable.txt'
+            file = get_data_path("DNACodonTable.txt")
         else:
-            file = '../Data/RNACodonTable.txt'
+            file = get_data_path("RNACodonTable.txt")
 
         with open(file, 'r') as table:
             codons = table.read().split()
@@ -133,3 +134,11 @@ def get_kmers(iterable, number):
             kmer += y
         kmers.append(kmer)
     return kmers
+
+
+def get_rosalind_data_path(file_code):
+    return get_data_path('rosalind_'+file_code+'.txt')
+
+
+def get_data_path(file_name):
+    return path.join(path.dirname(__file__), path.pardir, 'Data', file_name)

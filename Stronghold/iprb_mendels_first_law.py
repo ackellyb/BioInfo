@@ -1,3 +1,5 @@
+from rosalind_library import get_rosalind_data_path
+
 # Given: Three positive integers k, m, and n, representing a population containing
 #        k+m+nk+m+n organisms: k individuals are homozygous dominant for a factor,
 #        m are heterozygous, and n are homozygous recessive.
@@ -17,7 +19,7 @@ def compute(k, m, n):
 
 
 def main():
-    with open("../Data/rosalind_iprb.txt") as file:
+    with open(get_rosalind_data_path('iprb')) as file:
         kmn = list(map(lambda x: int(x), file.readline().split(" ")))
         print(compute(kmn[0], kmn[1], kmn[2]))
 
