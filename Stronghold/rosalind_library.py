@@ -19,6 +19,9 @@ class _PolyNucleotides:
     def __eq__(self, other):
         return self.string == other.string and type(self) == type(other)
 
+    def length(self):
+        return len(self.string)
+
     def _transcribe_to_protein(self, codon_table):
         protein_list = list()
         for i in range(0, len(self.string), 3):
@@ -28,6 +31,18 @@ class _PolyNucleotides:
             else:
                 protein_list.append(codon_table[codon])
         return "".join(protein_list)
+
+    def find_substring_locations(self, other):
+        if self.length() < other.length():
+            return list()
+        i = 0
+        index_list = list()
+        while i < len(self.string) - len(other.string):
+            i = self.string.find(other.string, i) + 1
+            if i == 0:
+                break
+            index_list.append(i)
+        return index_list
 
 
 rnaStringFormat = _PolyNucleotideStringFormat(r'[^ACGU]+?', 'RNA String had a value not of A, C, G or U')

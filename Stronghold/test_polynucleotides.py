@@ -22,3 +22,24 @@ class TestDNA:
         dna = DNA("ACG")
         rna = RNA("ACG")
         assert dna != rna
+
+    def test_find_substring_locations_no_substring(self):
+        expected = list()
+        pn1 = _PolyNucleotides('ACG')
+        pn2 = _PolyNucleotides('TC')
+        result = pn1.find_substring_locations(pn2)
+        assert expected == result
+
+    def test_find_substring_locations_matching_substring_larger(self):
+        expected = list()
+        pn1 = _PolyNucleotides('TC')
+        pn2 = _PolyNucleotides('ACG')
+        result = pn1.find_substring_locations(pn2)
+        assert expected == result
+
+    def test_find_substring_locations_success(self):
+        expected = [2, 4, 10]
+        pn1 = _PolyNucleotides('GATATATGCATATACTT')
+        pn2 = _PolyNucleotides('ATAT')
+        result = pn1.find_substring_locations(pn2)
+        assert expected == result
