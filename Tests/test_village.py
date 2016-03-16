@@ -1,10 +1,5 @@
-import pytest
-import simple_files
 import tempfile
-import simple_loops
-import simple_squares
-import string_splicing
-import simple_dictionary
+from Village import *
 
 
 class TestVillage:

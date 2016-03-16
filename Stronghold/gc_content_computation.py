@@ -1,5 +1,6 @@
-from rosalind_library import FASTADNA
-from rosalind_library import get_rosalind_data_path
+from Classes.nucleic_acid import FASTADNA
+from Classes.helper_functions import get_rosalind_data_path
+
 
 # Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
 #

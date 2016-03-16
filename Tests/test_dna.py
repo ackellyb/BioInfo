@@ -1,6 +1,5 @@
 import pytest
-from rosalind_library import DNA
-from rosalind_library import RNA
+from Classes.nucleic_acid import RNA, DNA
 
 
 class TestDNA:
