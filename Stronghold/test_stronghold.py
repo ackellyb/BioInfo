@@ -1,6 +1,13 @@
+import pytest
+from rosalind_library import DNA
+from rosalind_library import FASTADNA
+import dna_count_nucleotides
+import rna_dna_transcription
+import recv_dna_strand_complement
+import fib_recurrence_rabbits
+import gc_content_computation
+import iprb_mendels_first_law
 import tempfile
-from Stronghold import *
-from Classes.nucleic_acid import FASTADNA, DNA
 
 
 class TestStronghold:

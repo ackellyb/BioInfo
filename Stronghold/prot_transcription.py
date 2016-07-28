@@ -1,6 +1,5 @@
-from Classes.nucleic_acid import RNA
-from Classes.helper_functions import get_rosalind_data_path
-
+from rosalind_library import RNA
+from rosalind_library import get_rosalind_data_path
 
 # Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 kbp).
 #

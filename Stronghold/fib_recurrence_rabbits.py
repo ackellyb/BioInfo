@@ -1,4 +1,4 @@
-from Classes.helper_functions import get_rosalind_data_path
+from rosalind_library import get_rosalind_data_path
 
 # Given: Positive integers n≤40 and k≤5.
 #

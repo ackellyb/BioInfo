@@ -1,6 +1,5 @@
-from Classes.nucleic_acid import DNA
-from Classes.helper_functions import get_rosalind_data_path
-
+from rosalind_library import DNA
+from rosalind_library import get_rosalind_data_path
 
 #
 # Given: A DNA string s of length at most 1000 nt.

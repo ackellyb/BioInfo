@@ -1,5 +1,5 @@
 import pytest
-from Classes.nucleic_acid import RNA
+from rosalind_library import RNA
 
 
 class TestRNA:

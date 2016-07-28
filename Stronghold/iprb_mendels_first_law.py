@@ -1,4 +1,4 @@
-from Classes.helper_functions import get_rosalind_data_path
+from rosalind_library import get_rosalind_data_path
 
 # Given: Three positive integers k, m, and n, representing a population containing
 #        k+m+nk+m+n organisms: k individuals are homozygous dominant for a factor,

@@ -1,6 +1,5 @@
-from Classes.nucleic_acid import DNA
-from Classes.helper_functions import get_rosalind_data_path
-
+from rosalind_library import get_rosalind_data_path
+from rosalind_library import DNA
 
 # Given: Two DNA strings s and t (each of length at most 1 kbp).
 #
