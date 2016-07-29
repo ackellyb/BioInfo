@@ -1,5 +1,8 @@
 # Rosalind Problems Solution Set [![Build Status](https://travis-ci.org/ackellyb/Bioinfo.svg?branch=master)](https://travis-ci.org/ackellyb/Bioinfo)
-[Rosalind](www.rosalind.info) is a platform for learning bioinformatics and programming through problem solving. These are my solutions, coded in Python3
+[Rosalind](www.rosalind.info) is a platform for learning bioinformatics and programming through problem solving. These are my solutions, coded in Python2 and Python3.
+
+Currently I'm working on converting my current solutions from Python2 to Python3, refactoring the code in the process. I'm also writing test suites for any code updated. Once this task is done, I'll be working on new solutions, keeping to the same style and wrtingi tests as I go
+
 ## Python Village Problem Set
 Introductory problems to get used to Python
 
@@ -62,4 +65,12 @@ The core problem set
 | [Comparing Spectra with Spectral Convolution](http://rosalind.info/problems/conv) | WIP |
 | [Infeering Peptide from Full Spectrum](http://rosalind.info/problems/FULL) | WIP |
 
+## Bioinformatics Armory
+Problem sets that integrate the usage of third-party libraries
 
+| Problem | State |
+| --- | --- |
+| [Introduction to Bioinformatics Armory](http://rosalind.info/problems/ini) | 2->3 |
+| [Introduction to Protein Databases](http://rosalind.info/problems/dbpr) | 2->3 |
+| [Data Formats](http://rosalind.info/problems/frmt) | WIP |
+| [New Motif Discovery](http://rosalind.info/problems/meme) | WIP | 
